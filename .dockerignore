@@ -1,0 +1,17 @@
+
+# IDE Related Items
+/.idea
+/.vscode
+
+# Git Related Items
+.git
+.gitattributes
+.github
+.gitignore
+.gitmodules
+
+# Other
+LICENSE
+make.bat
+Makefile
+README.md
