@@ -2,7 +2,8 @@
 #
 
 # Variables
-IMAGETAG = "slate-remote-client:local"
+IMAGENAME = slate-remote-client
+IMAGETAG = $(IMAGENAME):local
 VERSION = "0.0.6"
 
 # Targets
@@ -10,32 +11,53 @@ VERSION = "0.0.6"
 build:
 	docker build --file ./Dockerfile --build-arg slateclientversion=$(VERSION) --tag $(IMAGETAG) .
 
-cli-dev: build
-	docker container rm slate-remote-client-dev
-	docker run -it \
-      -v ${PWD}/work:/work:Z \
-      --env SLATE_ENV=dev \
-      --name slate-remote-client-dev \
-      $(IMAGETAG)
-
-cli-prod: build
-	docker container rm slate-remote-client-prod
-	docker run -it \
-	  -v ${PWD}/work:/work:Z \
-	  --env SLATE_ENV=prod \
-	  --name slate-remote-client-prod \
-	  $(IMAGETAG)
-
-cli-staging: build
-	docker container rm slate-remote-client-staging
-	docker run -it \
-	  -v ${PWD}/work:/work:Z \
-	  --env SLATE_ENV=staging \
-	  --name slate-remote-client-staging \
-	  $(IMAGETAG)
+build-nocache:
+	docker build --file ./Dockerfile --build-arg slateclientversion=$(VERSION) --tag $(IMAGETAG) --no-cache .
 
 clean:
 	docker image rm $(IMAGETAG) -f
-	docker container rm slate-remote-client-dev
-	docker container rm slate-remote-client-prod
-	docker container rm slate-remote-client-staging
+	docker container rm $(IMAGENAME)-dev
+	docker container rm $(IMAGENAME)-prod
+	docker container rm $(IMAGENAME)-staging
+
+dev: build
+	(docker run -it \
+		-v ${PWD}/work:/work:Z \
+		--env SLATE_ENV=$@ \
+		--name $(IMAGENAME)-$@ \
+		$(IMAGETAG)) || \
+	(echo "Removing old containers....................................................." && \
+	  docker container rm $(IMAGENAME)-$@ && \
+      docker run -it \
+		-v ${PWD}/work:/work:Z \
+		--env SLATE_ENV=$@ \
+		--name $(IMAGENAME)-$@ \
+		$(IMAGETAG))
+
+prod: build
+	(docker run -it \
+		-v ${PWD}/work:/work:Z \
+		--env SLATE_ENV=$@ \
+		--name $(IMAGENAME)-$@ \
+		$(IMAGETAG)) || \
+	(echo "Removing old containers....................................................." && \
+	  docker container rm $(IMAGENAME)-$@ && \
+      docker run -it \
+		-v ${PWD}/work:/work:Z \
+		--env SLATE_ENV=$@ \
+		--name $(IMAGENAME)-$@ \
+		$(IMAGETAG))
+
+staging: build
+	(docker run -it \
+		-v ${PWD}/work:/work:Z \
+		--env SLATE_ENV=$@ \
+		--name $(IMAGENAME)-$@ \
+		$(IMAGETAG)) || \
+	(echo "Removing old containers....................................................." && \
+	  docker container rm $(IMAGENAME)-$@ && \
+      docker run -it \
+		-v ${PWD}/work:/work:Z \
+		--env SLATE_ENV=$@ \
+		--name $(IMAGENAME)-$@ \
+		$(IMAGETAG))

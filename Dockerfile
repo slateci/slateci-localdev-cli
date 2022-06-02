@@ -31,7 +31,7 @@ RUN chmod +x ./docker-entrypoint.sh
 RUN mkdir /docker
 
 # Add the SLATE API envs:
-COPY secrets/envs ./docker/envs
+COPY secrets ./docker/secrets
 
 # Add the scripts:
 COPY ./scripts ./docker/scripts
