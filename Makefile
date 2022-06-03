@@ -2,6 +2,7 @@
 #
 
 # Variables
+ENVS = dev devOld staging prod
 IMAGENAME = slate-remote-client
 IMAGETAG = $(IMAGENAME):local
 VERSION = "0.0.6"
@@ -16,39 +17,8 @@ build-nocache:
 
 clean:
 	docker image rm $(IMAGETAG) -f
-	docker container rm $(IMAGENAME)-dev
-	docker container rm $(IMAGENAME)-prod
-	docker container rm $(IMAGENAME)-staging
 
-dev: build
-	(docker run -it \
-		-v ${PWD}/work:/work:Z \
-		--env SLATE_ENV=$@ \
-		--name $(IMAGENAME)-$@ \
-		$(IMAGETAG)) || \
-	(echo "Removing old containers....................................................." && \
-	  docker container rm $(IMAGENAME)-$@ && \
-      docker run -it \
-		-v ${PWD}/work:/work:Z \
-		--env SLATE_ENV=$@ \
-		--name $(IMAGENAME)-$@ \
-		$(IMAGETAG))
-
-prod: build
-	(docker run -it \
-		-v ${PWD}/work:/work:Z \
-		--env SLATE_ENV=$@ \
-		--name $(IMAGENAME)-$@ \
-		$(IMAGETAG)) || \
-	(echo "Removing old containers....................................................." && \
-	  docker container rm $(IMAGENAME)-$@ && \
-      docker run -it \
-		-v ${PWD}/work:/work:Z \
-		--env SLATE_ENV=$@ \
-		--name $(IMAGENAME)-$@ \
-		$(IMAGETAG))
-
-staging: build
+$(ENVS): build
 	(docker run -it \
 		-v ${PWD}/work:/work:Z \
 		--env SLATE_ENV=$@ \
