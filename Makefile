@@ -4,30 +4,30 @@
 # Variables
 ENVS = dev devOld staging prod
 IMAGENAME = slate-remote-client
-IMAGETAG = $(IMAGENAME):local
+IMAGETAG = local
 VERSION = "0.0.6"
 
 # Targets
 
 build:
-	docker build --file ./Dockerfile --build-arg slateclientversion=$(VERSION) --tag $(IMAGETAG) .
+	docker build --file ./Dockerfile --build-arg slateclientversion=$(VERSION) --tag $(IMAGENAME):$(IMAGETAG) .
 
 build-nocache:
-	docker build --file ./Dockerfile --build-arg slateclientversion=$(VERSION) --tag $(IMAGETAG) --no-cache .
+	docker build --file ./Dockerfile --build-arg slateclientversion=$(VERSION) --tag $(IMAGENAME):$(IMAGETAG) --no-cache .
 
 clean:
-	docker image rm $(IMAGETAG) -f
+	docker image rm $(IMAGENAME):$(IMAGETAG) -f
 
 $(ENVS): build
 	(docker run -it \
 		-v ${PWD}/work:/work:Z \
 		--env SLATE_ENV=$@ \
 		--name $(IMAGENAME)-$@ \
-		$(IMAGETAG)) || \
+		$(IMAGENAME):$(IMAGETAG)) || \
 	(echo "Removing old containers....................................................." && \
 	  docker container rm $(IMAGENAME)-$@ && \
       docker run -it \
 		-v ${PWD}/work:/work:Z \
 		--env SLATE_ENV=$@ \
 		--name $(IMAGENAME)-$@ \
-		$(IMAGETAG))
+		$(IMAGENAME):$(IMAGETAG))
