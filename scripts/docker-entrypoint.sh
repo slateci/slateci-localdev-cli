@@ -24,6 +24,7 @@ echo "${!SLATE_API_TOKEN}" >> "${HOME}/.slate/token"
 chmod 600 "${HOME}/.slate/token"
 
 # Test SLATE API connection for errors:
+echo "Testing connection to API server..."
 slate whoami > /dev/null
 
 # Connection Information:
