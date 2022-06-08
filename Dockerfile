@@ -2,7 +2,7 @@
 FROM rockylinux/rockylinux:8
 
 # Docker image build arguments:
-ARG slateclientversion=0.0.6
+ARG slateclientversion=0.0.7
 
 # Docker container environmental variables:
 ENV HISTFILE=/work/.bash_history_docker
