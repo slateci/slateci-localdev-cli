@@ -9,6 +9,9 @@ then
   touch /work/.bash_history_docker
 fi
 
+# Set the bash prompt:
+export PS1="\[\033[1;31m\] (${SLATE_ENV})\[\033[00m\] \u@\h \[\033[32m\]\w\[\033[00m\]$ "
+
 # Load environmental values:
 source "/docker/scripts/yml.sh"
 create_variables "/docker/secrets/envs.yml" "conf_"
