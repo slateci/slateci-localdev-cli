@@ -1,5 +1,7 @@
 # Containerized SLATE Remote Client
 
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+
 > **_IMPORTANT:_** This repository requires a read-through of [CLI Access](https://portal.slateci.io/cli) beforehand and if you have questions reach out to the team via SLACK, in an email, or during the working-sessions.
 
 This repository contains a configurable container with the SLATE Remote Client.
