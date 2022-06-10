@@ -10,7 +10,7 @@ then
 fi
 
 # Set the bash prompt:
-export PS1="\[\033[1;31m\] (${SLATE_ENV})\[\033[00m\] \u@\h \[\033[32m\]\w\[\033[00m\]$ "
+export PS1="\[\033[1;31m\](${SLATE_ENV})\[\033[00m\] \u@\h \[\033[32m\]\w\[\033[00m\]$ "
 
 # Load environmental values:
 source "/docker/scripts/yml.sh"
