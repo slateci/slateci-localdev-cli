@@ -82,3 +82,15 @@ The `bash` history is saved to `work/.bash_history_docker` in this repository an
     5  exit
     6  history
 ```
+
+## Update this Code-base
+
+Periodically it will become necessary to update the `VERSION` variable used by `make` when a new SLATE CLI version is released. Create a new commit on *master* and tag it with the corresponding version of the SLATE CLI.
+
+For example:
+
+```shell
+VERSION = "1.0.21"
+```
+
+warrants a Git tag of `v1.0.21`.
