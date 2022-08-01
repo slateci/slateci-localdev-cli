@@ -23,6 +23,9 @@ RUN tar xzvf slate-linux.tar.gz && \
     mv slate /usr/bin/slate && \
     rm slate-linux.tar.gz slate-linux.sha256
 
+# Set SLATE CLI Bash completions:
+RUN echo 'source <(slate completion bash)' >> ${HOME}/.bashrc
+
 # Prepare entrypoint:
 COPY scripts/docker-entrypoint.sh ./
 RUN chmod +x ./docker-entrypoint.sh
