@@ -24,7 +24,7 @@ Install [Docker](https://docs.docker.com/get-docker/) for developing, managing, 
 
 ## Run the SLATE Remote Client
 
-Start the SLATE Remote Client for `dev`, `devOld`, `staging`, or `prod`.
+Start the SLATE Remote Client for `dev`, `staging`, `prod`, or `prod2`.
 * The `work` directory in this repository will be mounted to the container at `/work` for convenience. All content in this directory will be ignored by version control.
 * Windows hosts will not be able to use the `-s` option below as `make.bat` is taking the place of `Makefile`.
 
