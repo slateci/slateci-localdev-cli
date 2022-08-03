@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM rockylinux/rockylinux:8
+FROM docker.io/rockylinux/rockylinux:8
 
 # Docker image build arguments:
 ARG slateclientversion
