@@ -90,7 +90,7 @@ Periodically it will become necessary to update the `VERSION` variable used by `
 For example:
 
 ```shell
-VERSION = "1.0.21"
+VERSION = "1.0.23"
 ```
 
-warrants a Git tag of `v1.0.21`.
+warrants a Git tag of `v1.0.23`.
