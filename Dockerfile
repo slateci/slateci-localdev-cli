@@ -16,12 +16,10 @@ RUN dnf install -y \
 RUN dnf clean all
 
 # Download and install the SLATE CLI:
-RUN curl -LO https://github.com/slateci/slate-client-server/releases/download/v${slateclientversion}/slate-linux.tar.gz && \
-    curl -LO https://github.com/slateci/slate-client-server/releases/download/v${slateclientversion}/slate-linux.sha256
-RUN sha256sum -c slate-linux.sha256 || exit 1
-RUN tar xzvf slate-linux.tar.gz && \
-    mv slate /usr/bin/slate && \
-    rm slate-linux.tar.gz slate-linux.sha256
+COPY scripts/install-slate.sh ./
+RUN chmod +x ./install-slate.sh
+RUN ./install-slate.sh ${slateclientversion}
+RUN rm ./install-slate.sh
 
 # Set SLATE CLI Bash completions:
 RUN echo 'source <(slate completion bash)' >> ${HOME}/.bashrc

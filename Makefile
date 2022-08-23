@@ -5,7 +5,7 @@
 ENVS = dev staging prod prod2
 IMAGENAME = slate-remote-client
 IMAGETAG = local
-VERSION = "1.0.23"
+VERSION = "latest"
 
 # Targets
 

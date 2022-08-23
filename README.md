@@ -4,7 +4,7 @@
 
 > **_IMPORTANT:_** This repository requires a read-through of [CLI Access](https://portal.slateci.io/cli) beforehand and if you have questions reach out to the team via SLACK, in an email, or during the working-sessions.
 
-This repository contains a configurable container with the SLATE Remote Client.
+This repository contains a configurable container with the latest SLATE Remote Client.
 
 ## Requirements
 
@@ -69,6 +69,14 @@ exit
 [your@localmachine]$
 ```
 
+### Specify a SLATE Client Version
+
+Use different versions of the SLATE client by locally modifying the ``VERSION`` variable in ``./Makefile``. E.g.
+
+```makefile
+VERSION = "1.0.24"
+```
+
 ## Persistent Bash History
 
 The `bash` history is saved to `work/.bash_history_docker` in this repository and will persist for all containers unless the file is manually deleted.
@@ -82,15 +90,3 @@ The `bash` history is saved to `work/.bash_history_docker` in this repository an
     5  exit
     6  history
 ```
-
-## Update this Code-base
-
-Periodically it will become necessary to update the `VERSION` variable used by `make` when a new SLATE CLI version is released. Create a new commit on *master* and tag it with the corresponding version of the SLATE CLI.
-
-For example:
-
-```shell
-VERSION = "1.0.23"
-```
-
-warrants a Git tag of `v1.0.23`.
