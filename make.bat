@@ -6,7 +6,7 @@ REM Minimal makefile for containerized SLATE Remote Client (in-progress)
 
 set IMAGENAME=slate-remote-client
 set IMAGETAG=local
-set VERSION="0.0.6"
+set VERSION="latest"
 
 docker version >NUL 2>NUL
 if errorlevel 9009 (
