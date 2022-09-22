@@ -12,6 +12,10 @@ This repository contains a configurable container with the latest SLATE Remote C
 
 Install [Docker](https://docs.docker.com/get-docker/) for developing, managing, and running OCI containers on your host.
 
+#### Podman Support
+
+For those using Podman, either set up a shell alias or replace `docker` with `podman` in your copy of the `Makefile` and example commands below.
+
 ### Create `envs.yml`
 
 1. This fill will be ignored by version control.
@@ -23,6 +27,8 @@ Install [Docker](https://docs.docker.com/get-docker/) for developing, managing, 
    * And so forth.
 
 ## Run the SLATE Remote Client
+
+> **_NOTE:_** If a new SLATE Remote Client is released on GitHub, refer to the image cleanup information below to force a fresh client download.
 
 Start the SLATE Remote Client for `dev`, `staging`, `prod`, or `prod2`.
 * The `work` directory in this repository will be mounted to the container at `/work` for convenience. All content in this directory will be ignored by version control.
@@ -71,11 +77,26 @@ exit
 
 ### Specify a SLATE Client Version
 
-Use different versions of the SLATE client by locally modifying the ``VERSION`` variable in ``./Makefile``. E.g.
+Use different versions of the SLATE Remote Client by locally modifying the ``VERSION`` variable in ``./Makefile``. E.g.
 
 ```makefile
 VERSION = "1.0.24"
 ```
+
+## Image Clean Up
+
+Remove the `slate-remote-client:local` Docker image from your system:
+
+```shell
+[your@localmachine]$ make clean
+docker image rm slate-remote-client:local -f
+Untagged: localhost/slate-remote-client:local
+Deleted: 8367a39efdecc3f56eabc68c3392e69f5c54ca012e4420d5d5cf0c872d2d4321
+...
+...
+```
+
+If followed up by `make <env>`, a fresh copy of the SLATE Remote Client will be downloaded. This will catch any new releases that occurred since the image was created when `VERSION = "latest"` remains set in the `Makefile`.
 
 ## Persistent Bash History
 
