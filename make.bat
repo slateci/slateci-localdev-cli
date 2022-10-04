@@ -33,7 +33,6 @@ docker image rm %IMAGENAME%:%IMAGETAG% -f
 if "%1" == "dev" goto :env
 if "%1" == "staging" goto env
 if "%1" == "prod" goto env
-if "%1" == "prod2" goto env
 
 :env
 docker build --file Dockerfile --build-arg slateclientversion=%VERSION% --tag %IMAGENAME%:%IMAGETAG% .

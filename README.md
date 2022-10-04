@@ -30,7 +30,7 @@ For those using Podman, either set up a shell alias or replace `docker` with `po
 
 > **_NOTE:_** If a new SLATE Remote Client is released on GitHub, refer to the image cleanup information below to force a fresh client download.
 
-Start the SLATE Remote Client for `dev`, `staging`, `prod`, or `prod2`.
+Start the SLATE Remote Client for `dev`, `staging`, or `prod`.
 * The `work` directory in this repository will be mounted to the container at `/work` for convenience. All content in this directory will be ignored by version control.
 * Windows hosts will not be able to use the `-s` option below as `make.bat` is taking the place of `Makefile`.
 
