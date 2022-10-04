@@ -2,7 +2,7 @@
 #
 
 # Variables
-ENVS = dev staging prod prod2
+ENVS = dev staging prod
 IMAGENAME = slate-remote-client
 IMAGETAG = local
 VERSION = "latest"
