@@ -17,10 +17,11 @@ source "/docker/scripts/yml.sh"
 create_variables "/docker/secrets/envs.yml" "conf_"
 SLATE_API_HOSTNAME=conf_envs_${SLATE_ENV}_api_hostname
 SLATE_API_PORT=conf_envs_${SLATE_ENV}_api_port
+SLATE_API_PROTOCOL=conf_envs_${SLATE_ENV}_api_protocol
 SLATE_API_TOKEN=conf_envs_${SLATE_ENV}_api_token
 
 # Set the endpoint:
-export SLATE_API_ENDPOINT="https://${!SLATE_API_HOSTNAME}:${!SLATE_API_PORT}"
+export SLATE_API_ENDPOINT="${!SLATE_API_PROTOCOL}://${!SLATE_API_HOSTNAME}:${!SLATE_API_PORT}"
 
 # Set the token:
 echo "${!SLATE_API_TOKEN}" >> "${HOME}/.slate/token"
