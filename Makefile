@@ -2,10 +2,10 @@
 #
 
 # Variables
-ENVS = dev staging prod
+ENVS = local dev staging prod prod2
 IMAGENAME = slate-remote-client
 IMAGETAG = local
-VERSION = "latest"
+VERSION="latest"
 
 # Targets
 
@@ -18,11 +18,12 @@ build-nocache:
 clean:
 	docker image rm $(IMAGENAME):$(IMAGETAG) -f
 
-$(ENVS): build
+$(ENVS): build-nocache
 	(docker run -it \
 		-v ${PWD}/work:/work:Z \
 		--env SLATE_ENV=$@ \
 		--name $(IMAGENAME)-$@ \
+		--network="host" \
 		$(IMAGENAME):$(IMAGETAG)) || \
 	(echo "Removing old containers....................................................." && \
 	  docker container rm $(IMAGENAME)-$@ && \
@@ -30,4 +31,5 @@ $(ENVS): build
 		-v ${PWD}/work:/work:Z \
 		--env SLATE_ENV=$@ \
 		--name $(IMAGENAME)-$@ \
+		--network="host" \
 		$(IMAGENAME):$(IMAGETAG))
